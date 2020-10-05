@@ -1,0 +1,77 @@
+
+
+/* body{
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: rgba(204, 219, 231, 0.349);
+} */
+
+@include media-breakpoint-up(sm) {
+    html {
+        font-size: 1.2rem;
+    }
+}
+.w-8rem{
+    width: 8rem;
+}
+
+#jnserverchart,#jnnetworkchart,#jnservicechart,#gpkserverchart,#gpknetworkchart,#gpkservicechart{
+    width		: 20em;
+	height		: 20em;
+	font-size	: 1em;
+}
+
+.loader {
+    border          : 16px solid #f3f3f3; /* Light grey */
+    border-top      : 16px solid #3498db; /* Blue */
+    border-radius   : 50%;
+    width           : 120px;
+    height          : 120px;
+    animation       : spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform  : rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loader_sm {
+    border          : 16px solid #f3f3f3; /* Light grey */
+    border-top      : 16px solid #3498db; /* Blue */
+    border-radius   : 50%;
+    width           : 50px;
+    height          : 50px;
+    animation       : spin 2s linear infinite;
+}
+
+/* 點選top按鈕至頂 ，需搭配js。https://kknews.cc/zh-tw/news/k8o5arb.html*/
+.back-to-top {
+    display: none; /* 默認是隱藏的，這樣在第一屏才不顯示 */
+    position: fixed; /* 位置是固定的 */
+    bottom: 100px; /* 顯示在頁面底部 */
+    right: 50px; /* 顯示在頁面的右邊 */
+    z-index: 99; /* 確保不被其他功能覆蓋 */
+    border: 4px solid #167354; /* 顯示邊框 */
+    outline: none; /* 不顯示外框 */
+    background-color: #3c9678 ; /* 設置背景背景顏色 */
+    color: #fff; /* 設置文本顏色 */
+    cursor: pointer; /* 滑鼠移到按鈕上顯示手型 */
+    padding: 10px 15px 15px 15px; /* 增加一些內邊距 */
+    border-radius: 5px; /* 增加圓角 */
+    font-size: xx-large;
+}
+    
+.back-to-top:hover {
+    background-color: #167354; /* 滑鼠移上去時，反轉顏色 */
+    color: #fff;
+}
+
+.nav-link:hover{
+    color:#167354;
+}
+
+table.dataTable tbody tr.odd {
+    background-color: #dbdbdb !important;
+}
+.sorting_1 {
+    background-color: #1f5c6b !important;
+    color: #f0f0f0 !important;
+}
