@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block metas %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='all.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+{% endblock %}
+{% block page_content %}
+<button class="js-back-to-top back-to-top">︽<br>TOP</button>
+<!--navs start-->
+<div class="col-11 mx-auto ">
+    <div class="row">
+        <div id="showtime" class="col-md-8 col-11 mx-auto"></div>
+        <div class="col-md-4 row mx-auto">
+            <button type="button" class="btn btn-secondary col-12 mx-auto" onclick="apireflash()">Reflash</button>
+        </div>
+    </div>
+</div>
+<div class="col-12 mx-auto mt-3">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active border-bottom " id="website-tab" data-toggle="tab" href="#website" role="tab"
+                aria-controls="website" aria-selected="true"> 高雄 | WebSite </a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link  border-bottom  " id="webserver-tab" data-toggle="tab" href="#webserver" role="tab"
+                aria-controls="webserver" aria-selected="false"> WebServer </a>
+        </li> -->
+        <li class="nav-item">
+            <a class="nav-link  border-bottom  " id="webserver2-tab" data-toggle="tab" href="#webserver2" role="tab"
+                aria-controls="webserver2" aria-selected="false"> 高雄 | Web主機 </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  border-bottom  " id="webserver_tc-tab" data-toggle="tab" href="#webserver_tc" role="tab"
+                aria-controls="webserver_tc" aria-selected="false"> 台中 | Web主機 </a>
+        </li>
+    </ul>
+</div>
+
+<div class="col-12 mx-auto mt-1">
+    <div class="tab-content" id="myTabContent">
+        <!-- 區塊( 高雄 | WebSite ) -->
+        <div class="tab-pane fade show active" id="website" role="tabpanel" aria-labelledby="website-tab">
+            <div id="accordion-website" class="mt-3 row">
+                <div class="col-md-3">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="onlineweb-tab" data-toggle="pill" href="#onlineweb" role="tab"
+                            aria-controls="onlineweb" aria-selected="true">線上正式站台</a>
+                        <a class="nav-link" id="demoweb-tab" data-toggle="pill" href="#demoweb" role="tab"
+                            aria-controls="demoweb" aria-selected="false">測試站台</a>
+                        <a class="nav-link" id="control-tab" data-toggle="pill" href="#control" role="tab"
+                            aria-controls="control" aria-selected="false">管理站台</a>
+                    </div>
+                    <input id="searchword" type="search" class="light-table-filter form-control mt-3"
+                        data-table="order-table" placeholder="關鍵字搜尋">
+                </div>
+
+                <div class="col-md-9 table-rgba-light">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="onlineweb" role="tabpanel"
+                            aria-labelledby="onlineweb-tab">
+                            <div id="accordion-onlineweb">正在讀取資料中...</div>
+                        </div>
+                        <div class="tab-pane fade" id="demoweb" role="tabpanel" aria-labelledby="demoweb-tab">
+                            <div id="accordion-demoweb">正在讀取資料中...</div>
+                        </div>
+                        <div class="tab-pane fade" id="control" role="tabpanel" aria-labelledby="control-tab">
+                            <div id="accordion-control">正在讀取資料中...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="tab-pane show fade" id="webserver" role="tabpanel" aria-labelledby="webserver-tab">
+            <div class="mt-3">
+                <div id="accordion-webserver">
+                    Watting
+
+                </div>
+            </div>
+        </div> -->
+        <!--  區塊( 高雄 | Web主機 ) -->
+        <div class="tab-pane show fade" id="webserver2" role="tabpanel" aria-labelledby="webserver2-tab">
+            <div id="accordion-webserver2" class="row mt-3">
+                <div class="col-md-3 nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                    aria-orientation="vertical">
+                    <a class="nav-link revinfo" id="revinfo-tab" data-toggle="pill" href="#revinfo" role="tab"
+                        aria-controls="revinfo" aria-selected="true">* Rev主機IP</a>
+                    {% for value in revget%}
+                    <a class="nav-link" id="{{value[0]}}-tab" data-toggle="pill" href="#{{value[0]}}" role="tab"
+                        aria-controls="{{value[0]}}" aria-selected="true">{{value[0]}}</a>
+                    {% endfor%}
+                    
+                    <!-- <input type="search" class="light-table-filter form-control mt-3" data-table="order-table-2" placeholder="關鍵字搜尋"> -->
+                </div>
+                <div class="col-md-9">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link mx-3 float-right" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                        NginxStatus說明 &nbsp;<i class="fas fa-question-circle"></i>
+                    </button>
+                    <div class="tab-content table-rgba-light" id="v-pills-tabContent">
+                        <!-- 小分頁 - Rev主機列表 -->
+                        {% for value in revget%}
+                        <div class="tab-pane fade show" id="{{value[0]}}" role="tabpanel"
+                            aria-labelledby="{{value[0]}}-tab">
+                            <div id="accordion-{{value[0]}}">{{value[0]}}正在讀取資料中...</div>
+                        </div>
+                        {% endfor%}
+                        <!-- 小分頁 - Rev主機IP -->
+                        <div class="tab-pane fade" id="revinfo" role="tabpanel" aria-labelledby="revinfo-tab">
+                            <div id="accordion-revinfo">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">rev主機</th>
+                                            <th scope="col">public ip</th>
+                                            <th scope="col">private ip</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for rev_value in revipArray%}
+                                        <tr>
+                                            <td>{{rev_value.name}}</td>
+                                            <td>{{rev_value.ipaddress_pub}}</td>
+                                            <td>{{rev_value.ipaddress_pri}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 區塊( 台中 | Web主機 ) -->
+        <div class="tab-pane show fade" id="webserver_tc" role="tabpanel" aria-labelledby="webserver_tc-tab">
+            <div id="accordionExample_tc" class="card-body p-0 mt-3 table-rgba-light">
+                <table class="table table-responsive-sm table-hover tablesorter mb-1">
+                    <thead id="heading-table">
+                        <tr class="row">
+                            <th class="col-3 text-center border-0">連接主機</th>
+                            <td class="col-3 text-center border-0" style="color: #7db701;">
+                                活動次<br>(Active connections)</td>
+                            <td class="col-1 text-center border-0" style="color: #ff8a00;">
+                                讀取<br>(Reading)</td>
+                            <td class="col-1 text-center border-0" style="color: #ff8a00;">
+                                寫入<br>(Writing)</td>
+                            <td class="col-1 text-center border-0" style="color: #ff8a00;">
+                                等待<br>(Wating)</td>
+                            <td class="col-1 text-center border-0" style=""></td>
+                            <td class="col-2 text-center border-0 text-secondary" style="width:200px;">
+                                IP </td>
+                        </tr>
+                    </thead>
+                </table>
+                <div id="accordion-webserver_tc">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 區塊( 高雄 | Web主機 ) 的 說明 Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">NginxStatus說明</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>◆ 活動次(Active connections)</br>
+                    The current number of active client connections including Waiting
+                    connections.</p>
+                <p>◆ 讀取(Reading)</br>
+                    The current number of connections where nginx is reading the request
+                    header.</p>
+                <p>◆ 寫入(Writing)</br>
+                    The current number of connections where nginx is writing the
+                    response back to the client.</p>
+                <p>◆ 等待(Waiting)</br>
+                    The current number of idle client connections waiting for a request.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='popper.min.js') }}"
+integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+<script src="{{ url_for('static',filename='website3.js') }}"></script>
+{% endblock %}

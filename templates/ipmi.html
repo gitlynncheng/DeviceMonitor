@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-11" >
+        <button id="reflashbtn" class="btn btn-secondary col-2 float-right" onclick="listbtn()" style="display:inline">Reflash</button>
+
+    </div>
+</div>
+<div id="conn" class="mt-3 col-11">
+    <!-- <form method="POST" action="/ipmi/data">
+        <button id="idrac18" class="btn btn-secondary col-2">10.22.101.18</button>
+        {{ serverip }}
+    </form> -->
+</div>
+
+{% endblock %}
+
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script> 
+<script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+    <!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+    <script src="{{ url_for('static',filename='ipmi.js') }}"></script>
+{% endblock %}

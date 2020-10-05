@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="alert alert-primary" role="alert">
+    <h5>此功能進行異動後，需1分鐘後才可在主頁面與主機總覽頁面察看到新的資料內容。</h5>
+</div>
+<div class="col-11 mt-3 mx-auto">
+
+    <div class="row p-3 my-5 border rounded shadow" style="align-items:flex-end; background-color: #f0f1f2">
+        <!-- Server Name 區塊 -->
+        <!-- 選取Server Name列 -->
+        <div class="col-sm-9" onchange="postovserver()">{{ wtf.form_field(form_server.ServerSelect2) }}</div>
+        <div class="col-sm-3 ">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button id="btnserveradd" type="button" class="btn py-1" style="font-size: 2em; color: #3b8cc0;"
+                    data-toggle="modal" data-target="#btnserveraddModal"> <span class="fas fa-plus-square"
+                        aria-hidden="true"></span></button>
+                <button id="btnserverremove" type="button" class="btn py-1" style="font-size: 2em; color: #309cae;"
+                    data-toggle="modal" data-target="#btnserverremoveModal"> <span class="fas fa-minus-square"
+                        aria-hidden="true"></span></button>
+                <button id="btnserveredit" type="button" class="btn py-1" style="font-size: 2em; color: #eca945;"
+                    data-toggle="modal" data-target="#btnservereditModal"> <span class="fas fa-pen-square"
+                        aria-hidden="true"></span></button>
+            </div>
+        </div>
+
+        <!-- Vserver Name 區塊 -->
+        <!-- 選取VServer Name列 -->
+        <div class="col-sm-9">{{ wtf.form_field(form_server.VServerSelect2) }}</div>
+        <div class="col-sm-3">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button id="btnvserveradd" type="button" class="btn py-1" style="font-size: 2em; color: #3b8cc0;"
+                    data-toggle="modal" data-target="#btnvserveraddModal"> <span class="fas fa-plus-square"
+                        aria-hidden="true"></span></button>
+                <button id="btnvserverremove" type="button" class="btn py-1" style="font-size: 2em; color: #309cae;"
+                    data-toggle="modal" data-target="#btnvserverremoveModal"> <span class="fas fa-minus-square"
+                        aria-hidden="true"></span></button>
+                <button id="btnvserveredit" type="button" class="btn py-1" style="font-size: 2em; color: #eca945;"
+                    data-toggle="modal" data-target="#btnvservereditModal"> <span class="fas fa-pen-square"
+                        aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="row p-3 my-5 border rounded shadow" style="align-items:flex-end; background-color: #f0f1f2">
+        <!-- Service 區塊 -->
+        <div id="form_service" class="row col-12 p-5 " style="align-items:flex-end; background-color: #f0f1f2">
+            請先選取 Server Name 與 VServer Name 以便取得
+        </div>
+        <!-- Web 區塊 -->
+        <div id="form_website" class="row col-12 p-5 " style="align-items:flex-end; background-color: #f0f1f2"></div>
+
+    </div>
+    <!--  click button <btnserveradd> -->
+    <div class="modal fade" id="btnserveraddModal" tabindex="-1" role="dialog" aria-labelledby="btnserveraddModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div id="serveraddconn" class="modal-body">
+                    <form method="POST" action="/crud/createserver/">
+                        <dl>
+                            {{ wtf.form_field(form_server.Server0) }}
+                            {{ wtf.form_field(form_server.idcSelect0) }}
+                            {{ wtf.form_field(form_server.IPaddress0) }}
+                        </dl>
+                        <div class="modal-footer">
+                            <p><input class="btn btn-primary" type=submit value=Submit></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  click button <btnserverremove> -->
+    <div class="modal fade" id="btnserverremoveModal" tabindex="-1" role="dialog"
+        aria-labelledby="btnserverremoveModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div id="serverremoveconn" class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  click button <btnserveredit> -->
+    <div class="modal fade" id="btnservereditModal" tabindex="-1" role="dialog"
+        aria-labelledby="btnservereditModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div id="servereditconn" class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  click button <btnvserveradd> -->
+    <div class="modal fade" id="btnvserveraddModal" tabindex="-1" role="dialog"
+        aria-labelledby="btnvserveraddModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div id="vserveraddconn" class="modal-body">
+                    <form method="POST" action="/crud/createvserver/">
+                        <dl>
+                            {{ wtf.form_field(form_server.ServerSelect1) }}
+                            {{ wtf.form_field(form_server.VServer1) }}
+                            {{ wtf.form_field(form_server.IPaddress1) }}
+                        </dl>
+                        <div class="modal-footer">
+                            <p><input class="btn btn-primary" type=submit value=Submit></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  click button <btnvserverremove> -->
+    <div class="modal fade" id="btnvserverremoveModal" tabindex="-1" role="dialog"
+        aria-labelledby="btnvserverremoveModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div id="vserverremoveconn" class="modal-body">
+                    <form method="POST" action="/crud/deletevserver/">
+                        {{ wtf.form_field(form_deletevserver.ModifyIPaddress1) }}
+                        <div id="vserverremoveconn2"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  click button <btnvserveredit> -->
+    <div class="modal fade" id="btnvservereditModal" tabindex="-1" role="dialog"
+        aria-labelledby="btnvservereditModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div id="vservereditconn" class="modal-body">...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+<script src="{{ url_for('static',filename='edit_crud.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<div class="row">
+    <div class="col-11 mx-auto">
+        <span id="showtime"></span>
+        <button id="reflashbtn" class="btn btn-secondary col-2 float-right" onclick="listbtn()"
+            style="display:inline">Reflash</button>
+    </div>
+</div>
+<!--navs start-->
+<div class="col-11 mx-auto mt-3">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active border-bottom  " id="status-tab" data-toggle="tab" href="#status" role="tab"
+                aria-controls="status" aria-selected="false"> 總體狀態 </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  border-bottom  " id="mem-tab" data-toggle="tab" href="#mem" role="tab"
+                aria-controls="mem" aria-selected="false"> 記憶體 </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  border-bottom " id="harddisk-tab" data-toggle="tab" href="#harddisk" role="tab"
+                aria-controls="harddisk" aria-selected="true"> 儲存硬碟 </a>
+        </li>
+
+    </ul>
+</div>
+<!--Disk-->
+<div class="col-11 mx-auto">
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show" id="harddisk" role="tabpanel" aria-labelledby="harddisk-tab">
+            <div id="accordion-harddisk">
+                <div id="diskconn" class="mx-auto px-0 mt-3 col-12">正在讀取即時資料中...請稍後...</div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-link mx-3 float-right" data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                            燈號說明
+                        </button>
+                    </div>
+                </div>
+                <div class="mx-auto mt-3 col-12">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">燈號說明</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff; background-color: #1d5486;">
+                                        </span> unkown 未知</p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #212529;background-color: #ffe207;">
+                                        </span> ready 就緒</p>
+                                    <p><span class="badge badge-success"
+                                            style="width: 20px; height: 20px; display: inline-block;"> </span> online 聯機
+                                    </p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #60176b;">
+                                        </span> foreign 外來</p>
+                                    <p><span class="badge badge-secondary"
+                                            style="width: 20px; height: 20px; display: inline-block;"> </span> offline
+                                        拖機</p>
+                                    <p><span class="badge badge-primary"
+                                            style="width: 20px; height: 20px; display: inline-block;"> </span> blocked
+                                        已阻塞</p>
+                                    <p><span class="badge badge-danger"
+                                            style="width: 20px; height: 20px; display: inline-block;"> </span> failed 失敗
+                                    </p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #a862b3;">
+                                        </span> nonraid 非RAID </p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #f2bb1e;">
+                                        </span> removed 已移除</p>
+                                    <p><span class="badge badge-info"
+                                            style="width: 20px; height: 20px; display: inline-block;"> </span> readonly
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!--Status-->
+        <div class="tab-pane show fade active" id="status" role="tabpanel" aria-labelledby="status-tab">
+            <div class="mt-3">
+                <div id="accordion-status">
+                    <div id="statusconn" class="mx-auto px-0 mt-3 col-12">正在讀取資料中...</div>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-link mx-3 float-right" data-toggle="modal"
+                                data-target="#exampleModalCenter2">
+                                燈號說明
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mx-auto mt-3 col-12">
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle2">燈號說明</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><span class="badge"
+                                                style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #a862b3;"></span>
+                                            Other 其他</p>
+                                        <p><span class="badge"
+                                                style="width: 20px; height: 20px; display: inline-block; color: #fff; background-color: #1d5486;"></span>
+                                            Unknown 未知</p>
+                                        <p><span class="badge badge-success"
+                                                style="width: 20px; height: 20px; display: inline-block;"></span> ok 正常
+                                        </p>
+                                        <p><span class="badge"
+                                                style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #60176b;"></span>nonCritical
+                                            非關鍵</p>
+                                        <p><span class="badge badge-secondary"
+                                                style="width: 20px; height: 20px; display: inline-block;"></span>
+                                            Critical 關鍵 </p>
+                                        <p><span class="badge"
+                                                style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #f2bb1e;"></span>nonRecoverable
+                                            不可恢復 </p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--MEM-->
+        <div class="tab-pane fade show" id="mem" role="tabpanel" aria-labelledby="mem-tab">
+            <div id="accordion-mem">
+                <div id="memconn" class="mx-auto px-0 mt-3 col-12">正在讀取資料中...</div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-link mx-3 float-right" data-toggle="modal"
+                            data-target="#exampleModalCenter3">
+                            燈號說明
+                        </button>
+                    </div>
+                </div>
+                <div class="mx-auto mt-3 col-12">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle3" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle3">燈號說明</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #a862b3;"></span>
+                                        Other 其他</p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff; background-color: #1d5486;"></span>
+                                        Unknown 未知</p>
+                                    <p><span class="badge badge-success"
+                                            style="width: 20px; height: 20px; display: inline-block;"></span> ok 正常</p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #60176b;"></span>nonCritical
+                                        非關鍵</p>
+                                    <p><span class="badge badge-secondary"
+                                            style="width: 20px; height: 20px; display: inline-block;"></span> Critical
+                                        關鍵 </p>
+                                    <p><span class="badge"
+                                            style="width: 20px; height: 20px; display: inline-block; color: #fff;background-color: #f2bb1e;"></span>nonRecoverable
+                                        不可恢復 </p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script> -->
+<!-- <script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+<script src="{{ url_for('static',filename='idrac_tcvpn.js') }}"></script>
+{% endblock %}

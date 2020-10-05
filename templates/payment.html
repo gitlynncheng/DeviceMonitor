@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<div class="col-11 alert alert-info p-2 mx-auto" role="alert">
+    每30分鐘進行金流接口測試，Gateway需建立才會出現在下列即時監控中....
+</div>
+<div class="col-11 mx-auto ">
+    <div class="row">
+        <div id="showtime" class="col-md-8 col-11 mx-auto"></div>
+        <div class="col-md-4 row mx-auto">
+            <button type="button" class="btn btn-secondary col-12 mx-auto" onclick="apireflash()">Reflash</button>
+        </div>
+    </div>
+</div>
+
+<div class="row col-12 mx-auto mt-2 p-2" id="paymentconn">
+    <div class="col-md-2 mb-3 p-0 pr-3">
+        <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-Alive-tab" data-toggle="pill" href="#v-pills-Alive" role="tab"
+                aria-controls="v-pills-Alive" aria-selected="false">接口連接成功<br>Alive</a>
+            <a class="nav-link" id="v-pills-Dead-tab" data-toggle="pill" href="#v-pills-Dead" role="tab"
+                aria-controls="v-pills-Dead" aria-selected="false">接口連接失敗<br>Dead</a>
+            <!-- <a class="nav-link" id="v-pills-Fail-tab" data-toggle="pill" href="#v-pills-Fail" role="tab"
+                aria-controls="v-pills-Fail" aria-selected="false">接口異常<br>Fail</a> -->
+        </div>
+    </div>
+    <div class="col-md-3 p-0 pr-3">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-Alive" role="tabpanel"
+                aria-labelledby="v-pills-Alive-tab">
+                <div class="row pl-3">
+                    <div class="collapse show col-md-12 ">
+                        <div class="card card-body p-0" id="bodyAlive">Please Wait...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-Dead" role="tabpanel" aria-labelledby="v-pills-Dead-tab">
+                <div class="row pl-3">
+                    <div class="collapse show col-md-12">
+                        <div class="card card-body p-0" id="bodyDead">Please Wait...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="tab-pane fade" id="v-pills-Fail" role="tabpanel" aria-labelledby="v-pills-Fail-tab">
+                <div class="row pl-3">
+                    <div class="collapse show col-md-12">
+                        <div class="card card-body p-0" id="bodyFail">Please Wait...</div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="col-md-7 col-11 pr-0 mx-auto">
+        <div class=" mt-1 col-12 p-0" id="paymentinfo"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+<script src="{{ url_for('static',filename='payment.js') }}"></script>
+{% endblock %}

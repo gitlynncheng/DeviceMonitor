@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<div class="row">
+    <div class="col-11 mx-auto">
+        <span id="showtime"></span>
+        <button id="reflashbtn" class="btn btn-secondary col-2 float-right" onclick="listbtn()"
+            style="display:inline">Reflash</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-10 mx-auto mt-3">
+        <div class="rounded p-5 border rounded shadow" style="background-color: #f0f1f2">
+            <div class="row">
+                <div class="col-md-4">
+                        <img src="{{ url_for('static',filename='images/TS-453U-RP-Front.png') }}" class="w-100"
+                        alt="TS-453U-RP">
+                        <p class="font-weight-bold">型號: TS-453U-RP</p>
+                </div>
+                <div id="nas1conn" class="col-md-8">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row ">
+    <div class="col-10 mx-auto mt-3">
+        <div class="rounded p-5 border rounded shadow" style="background-color: #f0f1f2">
+            <div class="row">
+                <div id="nas2img" class="col-md-4">
+                    <img src="{{ url_for('static',filename='images/XN8012R.jpg') }}" class="w-100"
+                        alt="XN8012R">
+                    <p class="font-weight-bold">型號: XN8012R</p>
+                </div>
+                <div id="nas2conn" class="col-md-8">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+<script src="{{ url_for('static',filename='hardnas.js') }}"></script>
+{% endblock %}

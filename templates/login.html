@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+<div class="row m-5">
+    <div class="col-12 col-lg-5 mx-auto p-5 border border-color">
+        <!-- <hr> -->
+        <form class="form" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {{ wtf.form_field(form.username) }}
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {{ wtf.form_field(form.password) }}
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {{ wtf.form_field(form.remember_me) }}
+            <br>
+            <!-- {{ wtf.form_field(form.submit) }} -->
+            <button type="submit" class="btn btn-secondary col-12">登入</button>
+        </form>
+        <!-- <p>New User? <a href="{{ url_for('subregister.register') }}">Click to Register!</a></p> -->
+    </div>
+</div>
+{% endblock %}
+
+<!-- 
+
+        <form class="row" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}<br>
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}<br>
+                {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            <p>{{ form.submit() }}</p>
+
+        </form>
+
+-->

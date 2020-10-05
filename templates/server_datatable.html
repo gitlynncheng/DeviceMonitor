@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_head %}
+<style type="text/css">
+    td {
+        line-height: 2.5;
+    };
+    /* table.dataTable tbody tr {
+        background-color: #d8d8d8; !important
+    }; */
+</style>
+{% endblock %}
+
+{% block page_styles %}
+<link href='https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+<!-- <link href='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css' rel='stylesheet' type='text/css'>
+<link href='https://cdn.datatables.net/1.10.19/css/dataTables.uikit.min.css' rel='stylesheet' type='text/css'> -->
+{% endblock %}
+
+{% block page_content %}
+<button class="js-back-to-top back-to-top">︽<br>TOP</button>
+<!-- 原文網址：https://kknews.cc/news/k8o5arb.html -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mx-auto mt-0" style="font-size:large">
+            <!-- <table id="serverdatatable" class="uk-table uk-table-hover uk-table-striped" style="width:100%"> -->
+            <table id="serverdatatable" class="display stripe hover row-border order-column" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">Server</th>
+                        <th style="width: 8%">VServer</th>
+                        <th style="width: 10%">HostName</th>
+                        <th style="width: 5%">IP Address</th>
+                        <th style="width: 2%">CPUCore</th>
+                        <th style="width: 2%">CPU(%)</th>
+                        <th style="width: 2%">Memory Total</th>
+                        <th style="width: 2%">Memory(%)</th>
+                        <th style="width: 5%">Interface</th>
+                        <th style="width: 8%">Tx / Rx (Mbps)</th>
+                        <th style="width: 8%">DISK I/O (MB)</th>
+                        <th style="width: 2%">STATUS</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Server</th>
+                        <th>VServer</th>
+                        <th>HostName</th>
+                        <th>IP Address</th>
+                        <th>CPUCore</th>
+                        <th>CPU(%)</th>
+                        <th>Memory Total</th>
+                        <th>Memory(%)</th>
+                        <th>Interface</th>
+                        <th>Tx / Rx (Mbps)</th>
+                        <th>DISK I/O (MB)</th>
+                        <th>STATUS</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<a href="#" class="back-to-top">︽</a>
+
+
+{% endblock %}
+
+{% block sub_scripts %}
+<script type="text/javascript"  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"  src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+<!-- <script type="text/javascript"  src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+
+<!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script> -->
+<script src="{{ url_for('static',filename='jquery-ui.js') }}"></script>
+
+<script src="{{ url_for('static',filename='server_datatable.js') }}"></script>
+{% endblock %}

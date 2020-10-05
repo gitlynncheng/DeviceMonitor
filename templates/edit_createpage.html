@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+    <div class="row col-10 mx-auto mt-5">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">新增實體主機</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">新增虛擬主機</a>
+                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">新增服務項目</a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">新增網站的主機</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <!--新增實體主機-->
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="alert alert-primary" role="alert">
+                        <h5 >建立"實體主機"、"IDC位置" 與"IP位置"</h5>
+                        <h6  class="m-0">ps.建立虛擬機請使用"新增虛擬主機"功能</h6>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mx-auto mt-3">
+                            <form method="POST" action="/serveradd">
+                                <dl>
+                                    {{ wtf.form_field(form_createserver.Server0) }}
+                                    {{ wtf.form_field(form_createserver.idcSelect0) }}
+                                    {{ wtf.form_field(form_createserver.IPaddress0) }}
+                                </dl>
+                                <p><input class="btn btn-dark" type=submit value=Submit></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--新增虛擬主機-->
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="alert alert-primary" role="alert">
+                        <h5 class="m-0"> 從已建立的實體主機上建立"虛擬主機"與"IP位置" </h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mx-auto mt-3">
+                            <form method="POST" action="/vserveradd">
+                                <dl>
+                                    {{ wtf.form_field(form_createvserver.ServerSelect1) }}
+                                    {{ wtf.form_field(form_createvserver.VServer1) }}
+                                    {{ wtf.form_field(form_createvserver.IPaddress1) }}
+                                </dl>
+                                <p><input class="btn btn-dark" type=submit value=Submit></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--新增服務項目-->
+                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div class="alert alert-primary" role="alert">
+                        <h5 class="m-0">已建置的主機上新增"服務名稱"</h5>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mx-auto mt-3">
+                            <form method="POST" action="/serviceadd">
+                                <dl>
+                                    {{ wtf.form_field(form_createservice.ServerSelect2) }}
+                                    {{ wtf.form_field(form_createservice.VServerSelect2) }}
+                                    {{ wtf.form_field(form_createservice.Service2) }}
+                                </dl>
+                                <p><input class="btn btn-dark" type=submit value=Submit></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--新增網站的主機-->
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <div class="alert alert-primary" role="alert">
+                        <h5 class="m-0">新增"網站名稱"以及網站所屬"主機"、"服務"</h5>
+                    </div>
+                    <div class="alert alert-warning " role="alert">
+                            <h6 class="m-0">若網站位於多個主機，則新增時填入相同的站台名稱即可。</h6>
+                        </div>
+                    <div class="row">
+                            <div class="col-12 mx-auto mt-3">
+                                <form method="POST"  action="/webadd">
+                                    <dl>
+                                        {{ wtf.form_field(form_createweb.Web3) }} 
+                                        {{ wtf.form_field(form_createweb.ServerWebtype3) }} 
+                                        {{ wtf.form_field(form_createweb.ServerSelect3) }} 
+                                        {{ wtf.form_field(form_createweb.VServerSelect3) }} 
+                                        {{ wtf.form_field(form_createweb.ServiceSelect3) }} 
+                                        {{ wtf.form_field(form_createweb.Note3) }} 
+                                    </dl>
+                                    <p><input class="btn btn-dark" type=submit value=Submit></p>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
+
+{% block sub_scripts %}
+<!-- <script src="{{ url_for('static',filename='jquery-3.3.1.slim.min.js') }}"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script> 
+<script src="{{ url_for('static',filename='popper.min.js') }}"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='bootstrap.min.js') }}"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
+    <!-- <script src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='jquery-ui.js') }}"></script> -->
+    <script src="{{ url_for('static',filename='edit_createpage.js') }}"></script>
+{% endblock %}
